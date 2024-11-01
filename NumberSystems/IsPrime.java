@@ -1,32 +1,70 @@
 package NumberSystems;
 
-public class IsPrime {
-    public static boolean isPrime(int n) {
-        if (n <= 1)
-            return false;
-        for (int i = 2; i <= (int) Math.sqrt(n); i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
+import java.util.Arrays;
 
-    public static int countPrimes(int number) {
-        int counter = 0;
-        for (int i = 2; i < number; i++) {
-            if (isPrime(i)) {
-                counter++;
+/**
+ * IsPrime
+ */
+public class IsPrime {
+
+    public static int isPrime(int n) {
+        boolean[] primes = new boolean[n + 1]; // because arrays start from 0 and we are going to use array's index as
+                                               // values hence we need to go till n hence n+1;
+        Arrays.fill(primes, true);
+
+        primes[0] = primes[1] = false;
+        int count = 0;
+        for (int i = 2; i <= n; i++) {
+            System.out.println("outer loop" + i);
+            if (primes[i]) {
+                System.out.println("primes" + i);
+                count++;
+                for (int j = i * i; j <= n; j += i) {
+                    System.out.println("primes false" + j);
+                    primes[j] = false;
+                }
             }
+
         }
-        return counter;
+        return count;
     }
 
     public static void main(String[] args) {
-        System.out.println(countPrimes(10));
+        System.out.println(isPrime(20));
     }
 }
 
+// ################################### NAIVE SOLUTION
+// #######################################
+// public class IsPrime {
+// public static boolean isPrime(int n) {
+// if (n <= 1)
+// return false;
+// for (int i = 2; i <= (int) Math.sqrt(n); i++) {
+// if (n % i == 0) {
+// return false;
+// }
+// }
+// return true;
+// }
+
+// public static int countPrimes(int number) {
+// int counter = 0;
+// for (int i = 2; i < number; i++) {
+// if (isPrime(i)) {
+// counter++;
+// }
+// }
+// return counter;
+// }
+
+// public static void main(String[] args) {
+// System.out.println(countPrimes(10));
+// }
+// }
+
+// ###############################################################################
+// to be ignored.####################################
 // this solution is way dumb and i thought too much here bc.
 // this solution works but this is wayyyyy slower its that slow that time limit
 // gets exceeded even java.
