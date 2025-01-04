@@ -20,12 +20,12 @@ public class racing {
         if (n == 0) {
             System.out.println("");
         }
-        int m = laps[0].length;
+        // int m = laps[0].length;
         List<List<String>> al = new ArrayList<>();
         HashSet<String> hs = new HashSet<>();
         HashMap<String, Integer> hm = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            String[] rec = laps[i];
+            // String[] rec = laps[i];
             int max_number = -1;
             for (int j = 0; j < laps[i].length; j++) {
                 String[] arr = laps[i][j].split(" ");

@@ -18,6 +18,9 @@ public class MyArrays {
         // increment it always.
         if (this.index == this.items.length) {
             int[] temp = new int[items.length * 2];
+            for (int i = 0; i < items.length; i++) {
+                temp[i] = this.items[i];
+            }
 
         }
         this.items[index] = value;
