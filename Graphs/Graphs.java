@@ -1,7 +1,7 @@
 package Graphs;
 
 import java.util.ArrayList;
-
+0o
 public class Graphs {
 
     static class Edge {
@@ -44,7 +44,7 @@ public class Graphs {
 
         graph.get(6).add(new Edge(6, 5, 10));
         graph.get(6).add(new Edge(6, 4, 10));
-
+        System.out.println(graph);
     }
 
 }
