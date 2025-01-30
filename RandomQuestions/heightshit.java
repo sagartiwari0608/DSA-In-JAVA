@@ -1,4 +1,3 @@
-package RandomQuestions;
 
 // public class heightshit {
 // int[] heights = new int[] { 2, 7, 8, 5, 1, 6, 3, 9, 4 };

@@ -1,4 +1,3 @@
-package RandomQuestions;
 
 public class timeTravel {
 
