@@ -36,6 +36,25 @@ public class LinkedLists {
         head = null;
         tail = null;
     }
+    public void insertAtStart(int data){
+        Node node = new Node(data);
+        node.next= head;
+        head = node;
+    }
+    public void insertAtIndex(int data, int index){
+        if(isEmpty()) throw  new IllegalArgumentException();
+        Node prev = null;
+        Node current = head;
+        Node node = new Node(data);
+        while(index > 0 && current != null){
+            prev = current;
+            current =current.next;
+            index--;
+        }
+        prev.next = node;
+        node.next = current;
+
+    }
 
     public void insertWithTail(int data){
         Node node = new Node(data);
@@ -46,6 +65,9 @@ public class LinkedLists {
             tail.next = node;
             tail = tail.next;
         }
+    }
+    public boolean isEmpty(){
+        return head == null;
     }
 
     public void insertWithoutTail(int data) {
@@ -58,18 +80,35 @@ public class LinkedLists {
                 current = current.next;
             }
             current.next = node;
+
         }
+        tail = node;
     }
 
-    public int removeFirst() {
+    public void removeFirst() {
+        if(isEmpty()) return;
+        if(head.next ==null) {
+            head = null;
+            return ;
+        }
         int headData = head.getData();
+        Node current = head;
         this.head = this.head.next;
-        return headData;
+        current.next = null; // so that garbage collector can free up this memory
     }
-//    public int removeLast(){
-//
-//        int headData = head.getData();
-//    }
+    public void removeLast(){
+        if(isEmpty()) return;
+        if(head.next ==null) {
+            head = null;
+            return ;
+        }
+        Node current = head;
+        while (current.next.next !=null){
+            current = current.next;
+        }
+        tail = current;
+        tail.next = null;
+    }
 
     public String toString() {
         StringBuffer strbfr = new StringBuffer();
@@ -86,6 +125,22 @@ public class LinkedLists {
         }
         return strbfr.toString();
     }
+
+    public void reverseLL(){
+        if(head == null || head.next == null) return;
+        Node prev = null;
+        Node current = head;
+        Node next = head.next;
+        while(next !=null){
+            current.next = prev;
+            prev = current ;
+            current = next;
+            next = next.next;
+        }
+        current.next = prev;
+        head = current;
+
+    }
 }
 
 class LinkedListsImplementation {
@@ -96,11 +151,17 @@ class LinkedListsImplementation {
         linkedList.insertWithTail(5);
         linkedList.insertWithTail(6);
         linkedList.insertWithTail(7);
+        linkedList.insertAtStart(0);
         System.out.println(linkedList);
 
-        System.out.println(linkedList.removeFirst());;
+//        linkedList.insertAtIndex(10,3);
+//        linkedList.reverseLL(); // we were seeing only first item because last link creation was pending
+//        System.out.println(linkedList+"line 142");
+
+        linkedList.removeFirst();
+        linkedList.removeLast();
         System.out.println(linkedList);
-        ;
+
     }
 
 }
