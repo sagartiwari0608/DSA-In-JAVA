@@ -110,6 +110,23 @@ public class LinkedLists {
         tail.next = null;
     }
 
+    public void removeNthFromLast(int indexFromLast){
+        // we are gonna use 2 pointers approach which will have one slow and one fast pointer
+        Node slow = head;
+        Node fast = head;
+
+        for(int i =0; i < indexFromLast; i++){
+            fast = fast.next;
+        }
+        while(fast.next != null){
+            fast = fast.next;
+            slow=slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return;
+    }
+
     public String toString() {
         StringBuffer strbfr = new StringBuffer();
         Node current = head;
@@ -158,8 +175,10 @@ class LinkedListsImplementation {
 //        linkedList.reverseLL(); // we were seeing only first item because last link creation was pending
 //        System.out.println(linkedList+"line 142");
 
-        linkedList.removeFirst();
-        linkedList.removeLast();
+        // linkedList.removeFirst();
+        // linkedList.removeLast();
+        linkedList.removeNthFromLast(3);
+
         System.out.println(linkedList);
 
     }
