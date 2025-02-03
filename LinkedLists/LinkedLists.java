@@ -110,21 +110,50 @@ public class LinkedLists {
         tail.next = null;
     }
 
-    public void removeNthFromLast(int indexFromLast){
+    public Node removeNthFromLast(int indexFromLast){
         // we are gonna use 2 pointers approach which will have one slow and one fast pointer
+//        Node slow = head;
+//        Node fast = head;
+//
+//        for(int i =0; i < indexFromLast; i++){
+//            fast = fast.next;
+//        }
+//        while(fast.next != null){
+//            fast = fast.next;
+//            slow=slow.next;
+//        }
+//
+//        slow.next = slow.next.next;
+//        return;
+
+
+//        the above solution works but totally eats shit in terms of edge cases. so we need to fix it by using 3 pointers
+        if(head == null ) return null;
+        if(head.next == null) return null;
+
+        // now we need 3 pointers
+        Node prev = null;
         Node slow = head;
         Node fast = head;
-
-        for(int i =0; i < indexFromLast; i++){
+        while(indexFromLast > 1 && fast !=null ){
             fast = fast.next;
+            indexFromLast--;
         }
-        while(fast.next != null){
+        while(fast.next!=null){
+            prev = slow;
+            slow = slow.next;
             fast = fast.next;
-            slow=slow.next;
-        }
 
-        slow.next = slow.next.next;
-        return;
+        }
+        if(prev == null){
+            head = slow.next;
+            slow.next = null;
+            return head;
+        }
+        prev.next = slow.next;
+        slow.next = null;
+        return head;
+
     }
 
     public String toString() {
