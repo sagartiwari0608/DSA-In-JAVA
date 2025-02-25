@@ -26,6 +26,7 @@ public class HashmapLearning {
         System.out.println(map.containsKey("India"));
         System.out.println(map.containsKey("Utopia"));
         
+        // since we know one key can only be there for once in a hashmap so this will always return only a set of all the keys.
         Set<String> keys = map.keySet();
         System.out.println(keys);
 
