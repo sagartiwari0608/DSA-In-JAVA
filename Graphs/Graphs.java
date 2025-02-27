@@ -1,6 +1,7 @@
 package Graphs;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Graphs {
 
@@ -51,7 +52,6 @@ public class Graphs {
 
     public static void main(String[] args) {
         int vertices = 7; // 0 to 6
-        boolean[] visited = new boolean[vertices];
         ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
         for (int i = 0; i < vertices; i++) {
             graph.add(new ArrayList<>());
@@ -79,8 +79,9 @@ public class Graphs {
         graph.get(6).add(new Edge(6, 5, 10));
         graph.get(6).add(new Edge(6, 4, 10));
         // System.out.println(graph);
-        System.out.println(hasPath(graph, 0, 6, visited));
-        printAllPaths(graph, 0, 6, visited, 0 + "");
+        // System.out.println(hasPath(graph, 0, 6, visited));
+        // printAllPaths(graph, 0, 6, visited, 0 + "");
+
         // for (ArrayList<Edge> arrayList : graph) {
         // for (Edge edge: arrayList) {
         // System.out.println();
@@ -90,19 +91,36 @@ public class Graphs {
         // System.out.println(graph);
 
         int src = 0;
+        PriorityQueue<CurrentVertex> pq = new PriorityQueue<>();
 
+        boolean[] visited = new boolean[vertices];
+        pq.offer(new CurrentVertex(src, src + " ", 0));
+        while (pq.size() > 0) {
+            CurrentVertex removedVertex = pq.remove();
+            if (visited[removedVertex.vertex] = true) {
+                continue;
+            }
+            visited[removedVertex.vertex] = true;
+            System.out.println(src + " " + removedVertex.pathSoFar + removedVertex.weightSoFar);
+            for (Edge e : graph.get(removedVertex.vertex)) {
+                if (visited[removedVertex.vertex] == false) {
+                    pq.add(new CurrentVertex(e.neighbour, removedVertex.weightSoFar + e.weight,
+                            removedVertex.pathSoFar + e.neighbour));
+                }
+            }
+        }
     }
 
-    // class CurrentVertex(){
-    // int vertex ;
-    // int weightSoFar;
-    // int pathSoFar;
+    public static class CurrentVertex {
+        int vertex;
+        String weightSoFar;
+        int pathSoFar;
 
-    // CurrentVertex(int vertex, int weightSoFar, int pathSoFar) {
-    // this.vertex = vertex;
-    // this.weightSoFar = weightSoFar;
-    // this.pathSoFar = pathSoFar;
-    // }
-    // }
+        CurrentVertex(int vertex, String weightSoFar, int pathSoFar) {
+            this.vertex = vertex;
+            this.weightSoFar = weightSoFar;
+            this.pathSoFar = pathSoFar;
+        }
+    }
 
 }
