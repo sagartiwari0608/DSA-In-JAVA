@@ -16,8 +16,42 @@ public class Graphs {
         }
     }
 
+    public static boolean hasPath(ArrayList<ArrayList<Edge>> graph, int src, int dest, boolean[] visited) {
+        if (src == dest) {
+            return true;
+        }
+        visited[src] = true;
+        for (Edge edge : graph.get(src)) { // graph.get(src) will return us an array list which will replace it and
+                                           // hence code will be Edge edge: ArrayList<Edge>
+            if (visited[edge.neighbour] == false) {
+                boolean hasNbrPath = hasPath(graph, edge.neighbour, dest, visited);
+                if (hasNbrPath == true) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void printAllPaths(ArrayList<ArrayList<Edge>> graph, int src, int dest, boolean[] visited,
+            String pathSoFar) {
+        if (src == dest) {
+            System.out.println(pathSoFar);
+            return;
+        }
+        visited[src] = true;
+        for (Edge edge : graph.get(src)) { // graph.get(src) will return us an array list which will replace it and
+                                           // hence code will be Edge edge: ArrayList<Edge>
+            if (visited[edge.neighbour] == false) {
+                printAllPaths(graph, edge.neighbour, dest, visited, pathSoFar + edge.neighbour);
+            }
+        }
+        visited[src] = false;
+    }
+
     public static void main(String[] args) {
         int vertices = 7; // 0 to 6
+        boolean[] visited = new boolean[vertices];
         ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
         for (int i = 0; i < vertices; i++) {
             graph.add(new ArrayList<>());
@@ -44,6 +78,9 @@ public class Graphs {
 
         graph.get(6).add(new Edge(6, 5, 10));
         graph.get(6).add(new Edge(6, 4, 10));
+        // System.out.println(graph);
+        System.out.println(hasPath(graph, 0, 6, visited));
+        printAllPaths(graph, 0, 6, visited, 0 + "");
         // for (ArrayList<Edge> arrayList : graph) {
         // for (Edge edge: arrayList) {
         // System.out.println();
@@ -56,16 +93,16 @@ public class Graphs {
 
     }
 
-    class CurrentVertex(){
-        int vertex ;
-        int weightSoFar;
-        int pathSoFar;
+    // class CurrentVertex(){
+    // int vertex ;
+    // int weightSoFar;
+    // int pathSoFar;
 
-        CurrentVertex(int vertex, int weightSoFar, int pathSoFar) {
-            this.vertex = vertex;
-            this.weightSoFar = weightSoFar;
-            this.pathSoFar = pathSoFar;
-        }
-    }
+    // CurrentVertex(int vertex, int weightSoFar, int pathSoFar) {
+    // this.vertex = vertex;
+    // this.weightSoFar = weightSoFar;
+    // this.pathSoFar = pathSoFar;
+    // }
+    // }
 
 }
