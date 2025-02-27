@@ -44,7 +44,28 @@ public class Graphs {
 
         graph.get(6).add(new Edge(6, 5, 10));
         graph.get(6).add(new Edge(6, 4, 10));
-        System.out.println(graph);
+        // for (ArrayList<Edge> arrayList : graph) {
+        // for (Edge edge: arrayList) {
+        // System.out.println();
+        // }
+
+        // }
+        // System.out.println(graph);
+
+        int src = 0;
+
+    }
+
+    class CurrentVertex(){
+        int vertex ;
+        int weightSoFar;
+        int pathSoFar;
+
+        CurrentVertex(int vertex, int weightSoFar, int pathSoFar) {
+            this.vertex = vertex;
+            this.weightSoFar = weightSoFar;
+            this.pathSoFar = pathSoFar;
+        }
     }
 
 }
