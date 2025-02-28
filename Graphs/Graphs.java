@@ -1,6 +1,7 @@
 package Graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class Graphs {
@@ -52,7 +53,8 @@ public class Graphs {
 
     public static void main(String[] args) {
         int vertices = 7; // 0 to 6
-        ArrayList<ArrayList<Edge>> graph = new ArrayList<>();
+        ArrayList<ArrayList<Edge>> graph = new ArrayList<>(); // now this graph can also be called as list of edges as
+                                                              // these aren't really connected with each other.
         for (int i = 0; i < vertices; i++) {
             graph.add(new ArrayList<>());
         }
@@ -91,6 +93,14 @@ public class Graphs {
         // System.out.println(graph);
 
         int src = 0;
+        dijkstraAlgo(src, vertices, graph);
+
+    }
+
+    // now this dijkstraAlgo checks all the vertices but only once. uses greedy
+    // approach and finds best option only once. limitation: negative paths are not
+    // well addressed in this alg. Bellman Ford's algo is improvement over this.
+    public static void dijkstraAlgo(int src, int vertices, ArrayList<ArrayList<Edge>> graph) {
         PriorityQueue<CurrentVertex> pq = new PriorityQueue<>();
 
         boolean[] visited = new boolean[vertices];
@@ -109,6 +119,39 @@ public class Graphs {
                 }
             }
         }
+
+    }
+
+    public static int[] bellmanFord(int vertices, ArrayList<ArrayList<Edge>> graph, int src) {
+        int[] distances = new int[vertices];
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        distances[src] = 0;
+        for (int i = 0; i < vertices - 1; i++) {
+            for (ArrayList<Edge> edge : graph) {
+                int start = edge.get(0).start;
+                int neighbour = edge.get(0).neighbour;
+                int weight = edge.get(0).weight;
+                if (distances[start] != Integer.MAX_VALUE && distances[start] + weight < distances[neighbour]) {
+                    distances[neighbour] = distances[start] + weight;
+                }
+            }
+        }
+
+        // to check if the graph has negative cycle. we repeat the same process once
+        // again if the distance of any point gets relaxed then it would have a negative
+        // cycle. we just have to iterate the inner loop means graph will be relaxed
+        // once more.
+        for (ArrayList<Edge> edge : graph) {
+            int start = edge.get(0).start;
+            int neighbour = edge.get(0).neighbour;
+            int weight = edge.get(0).weight;
+            if (distances[start] != Integer.MAX_VALUE && distances[start] + weight < distances[neighbour]) {
+                return new int[] { -1 };
+            }
+        }
+
+        return distances;
+
     }
 
     public static class CurrentVertex {
