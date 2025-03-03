@@ -1,7 +1,7 @@
 package ArraysInJava;
 
 import java.util.Arrays;
-
+// this shit worked but i wont use it as it is more complex and unable to solve problems arising in this 
 public class MergingSortIssueTrial {
     public static void main(String[] args) {
         int[] original = new int[] { 2, 4, 5, 1, 8, 9 };
