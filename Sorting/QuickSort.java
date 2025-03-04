@@ -17,7 +17,7 @@ public class QuickSort {
     public static int partitionOnPivot(int[] arr, int start, int end, int pivot) {
         int i = start;
         int j = start;
-        while (i <= end) {
+        while (i < end) {
             if (arr[i] > pivot) {
                 i++;
             } else {
@@ -33,10 +33,11 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        // int[] arr = { 2, 10, 8, 7, 5, 18, 6, 3 };
-        int[] arr = { 7, 9, 4, 8, 3, 6, 2, 1 };
-        // partitionOnPivot(arr, 0, arr.length - 1, 5);
-        QuickSortInPlace(arr, 0, arr.length - 1);
+        int[] arr = { 2, 10, 8, 7, 5, 18, 6, 3 }; // this algo can also be very ineffective if we dont select the pivot
+                                                  // carefully. the best way is to select the pivot last element
+        // int[] arr = { 7, 9, 4, 8, 3, 6, 2, 1 };
+        partitionOnPivot(arr, 0, arr.length, 3); // here if we select last element then it will always work fine.
+        // QuickSortInPlace(arr, 0, arr.length - 1);
         for (int i : arr) {
             System.out.println(i);
         }
