@@ -33,13 +33,18 @@ public class GoogleQuestion {
             return result;
         }
         // for (int i = 0; i < result.length; i++) {
-        // result[i] = temp;
+        // result[i] = temp; // we can either do this or directly use temp while
+        // deviding.
         // }
         for (int i = 0; i < result.length; i++) {
-            if (nums[i] == 0) {
-                result[i] = temp;
+            if (count > 0) {
+                if (nums[i] == 0) {
+                    result[i] = temp;
+                } else {
+                    result[i] = 0;
+                }
             } else {
-                result[i] = 0;
+                result[i] = temp / nums[i];
             }
         }
 
