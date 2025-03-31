@@ -36,6 +36,7 @@ public class RotateLinkedList {
         head.next.next.next.next = new Node(5);
         int k = 2;
         Node current = rotateRight(head, k);
+        // should print 4 -> 5 -> 1 -> 2 -> 3
         while (current != null) {
             System.out.println(current.data);
             current = current.next;
