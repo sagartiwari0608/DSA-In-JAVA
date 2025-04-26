@@ -1,4 +1,4 @@
-package GFG160Days;
+package GFG160Days.Arrays;
 
 public class PushAllZerosToEnd {
 
