@@ -17,8 +17,7 @@ public class InbuiltPriorityQueues {
         }
         while (priorityQueue.size() > 0) {
             System.out.println(priorityQueue.peek());
-            // priorityQueue.remove(); // this loop also runs n log n because remove is log
-            // n
+            // priorityQueue.remove(); // this loop also runs n log n because remove is logn 
             priorityQueue.poll();
         }
 
